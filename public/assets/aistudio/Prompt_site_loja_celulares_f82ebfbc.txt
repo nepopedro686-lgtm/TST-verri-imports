@@ -1,0 +1,853 @@
+# PROJETO: SITE PROFISSIONAL DE LOJA DE CELULARES COM CATÁLOGO DINÂMICO E PAINEL ADMINISTRATIVO
+
+## 1. PAPEL E OBJETIVO
+
+Atue como uma equipe profissional composta por desenvolvedor full-stack sênior, designer UI/UX, especialista em comércio eletrônico, especialista em SEO e especialista em experiência do usuário mobile.
+
+Sua missão é projetar e desenvolver um site profissional para uma loja de celulares e acessórios.
+
+O site deve funcionar como um catálogo digital de produtos, permitindo que os visitantes visualizem os aparelhos disponíveis, consultem preços, vejam fotografias reais e entrem em contato com a loja pelo WhatsApp.
+
+O proprietário precisa ter um painel administrativo próprio, simples e intuitivo, no qual possa adicionar, editar, excluir e atualizar produtos sem precisar programar, editar códigos ou depender de um desenvolvedor.
+
+O sistema deve funcionar corretamente tanto em celulares Android e iPhone quanto em computadores e tablets.
+
+Não quero apenas uma demonstração visual ou uma página estática. Quero uma aplicação funcional, com gerenciamento persistente de produtos, imagens, preços e disponibilidade.
+
+Antes de começar, analise os requisitos, escolha uma arquitetura adequada e implemente o projeto de forma organizada.
+
+Se a plataforma disponibilizar recursos de backend, banco de dados, autenticação e armazenamento de imagens, utilize-os quando necessários para cumprir os requisitos.
+
+Não simule funcionalidades que não estejam realmente implementadas.
+
+---
+
+## 2. IDENTIDADE VISUAL E DESIGN
+
+Crie uma identidade visual moderna, profissional, sofisticada e comercialmente eficiente.
+
+O site deve transmitir:
+- Confiança.
+- Credibilidade.
+- Modernidade.
+- Organização.
+- Segurança na compra.
+- Facilidade para encontrar o aparelho desejado.
+
+### Direção visual
+
+Utilize um design contemporâneo inspirado nas melhores lojas de tecnologia e eletrônicos.
+
+Características desejadas:
+- Layout limpo e organizado.
+- Tipografia moderna e legível.
+- Excelente hierarquia visual.
+- Espaçamento consistente.
+- Cards de produtos bem estruturados.
+- Fotografias dos aparelhos em destaque.
+- Botões claramente identificáveis.
+- Ícones discretos e consistentes.
+- Animações suaves e rápidas, somente quando contribuírem para a experiência.
+
+Evite:
+- Aparência genérica de site criado automaticamente.
+- Excesso de gradientes.
+- Excesso de animações.
+- Elementos decorativos desnecessários.
+- Textos excessivamente longos.
+- Poluição visual.
+- Cores que prejudiquem a leitura.
+- Efeitos que tornem o site lento.
+- Botões falsos ou funcionalidades meramente decorativas.
+
+A identidade visual deve parecer a de uma empresa real e estabelecida.
+
+Utilize uma paleta de cores profissional, preferencialmente com fundos neutros, bom contraste e uma cor de destaque para os botões principais.
+
+Deixe a identidade visual preparada para receber:
+- Nome da loja.
+- Logotipo.
+- Cores da marca.
+- Endereço.
+- Telefone.
+- WhatsApp.
+- Redes sociais.
+
+Como essas informações ainda não foram fornecidas, utilize valores provisórios claramente identificados e fáceis de modificar posteriormente.
+
+Não invente endereço, CNPJ, certificações, garantias, avaliações de clientes ou informações comerciais reais.
+
+---
+
+## 3. ESTRUTURA DO SITE PÚBLICO
+
+Crie as seguintes páginas e seções.
+
+### 3.1. Página inicial
+
+A página inicial deve apresentar a loja e facilitar o acesso ao catálogo.
+
+Inclua:
+
+1. Cabeçalho com logotipo e nome da loja.
+2. Menu de navegação simples.
+3. Campo de pesquisa de produtos.
+4. Botão para visualizar todos os aparelhos.
+5. Categorias de produtos.
+6. Seção de aparelhos em destaque.
+7. Seção de ofertas, caso existam produtos efetivamente cadastrados como oferta.
+8. Seção de diferenciais comerciais configuráveis.
+9. Botão de contato pelo WhatsApp.
+10. Informações de contato e localização, quando fornecidas.
+11. Rodapé com informações da empresa, políticas e redes sociais configuradas.
+
+O cabeçalho deve permanecer organizado em telas pequenas.
+
+No celular, priorize a busca, as categorias e o acesso rápido aos produtos.
+
+Não preencha o site com promoções inventadas ou preços fictícios apresentados como reais.
+
+Se não houver produtos cadastrados, mostre uma página vazia elegante com uma mensagem explicando que os aparelhos serão disponibilizados em breve.
+
+### 3.2. Catálogo de produtos
+
+Crie uma página dedicada à listagem de todos os aparelhos cadastrados.
+
+Cada produto deve aparecer em um card com:
+- Fotografia principal.
+- Marca.
+- Modelo.
+- Capacidade de armazenamento, quando aplicável.
+- Condição do aparelho.
+- Preço atual.
+- Preço anterior, somente quando houver uma promoção verdadeira cadastrada.
+- Estado de disponibilidade.
+- Botão para ver detalhes.
+- Botão para consultar pelo WhatsApp.
+
+Os cards devem ter aparência profissional, com imagens padronizadas e preços fáceis de identificar.
+
+O catálogo deve atualizar automaticamente quando o administrador adicionar, modificar ou remover produtos.
+
+Não exiba produtos de exemplo permanentemente na versão de produção.
+
+### 3.3. Pesquisa de produtos
+
+Implemente uma pesquisa funcional que permita encontrar aparelhos pelo:
+- Nome.
+- Marca.
+- Modelo.
+- Capacidade de armazenamento.
+- Código interno do produto, caso exista.
+
+A pesquisa deve apresentar resultados relevantes enquanto o usuário digita, respeitando o desempenho em dispositivos móveis.
+
+Inclua uma mensagem amigável quando nenhum resultado for encontrado.
+
+### 3.4. Filtros e ordenação
+
+Permita filtrar produtos por:
+
+- Marca: Apple, Samsung, Motorola, Xiaomi e outras marcas cadastradas.
+- Faixa de preço.
+- Condição: novo, usado ou seminovo.
+- Capacidade de armazenamento.
+- Disponibilidade.
+- Categoria.
+
+As marcas e categorias devem ser administráveis. Não limite o sistema a uma lista fixa de fabricantes.
+
+Permita ordenar os produtos por:
+- Menor preço.
+- Maior preço.
+- Mais recentes.
+- Ordem alfabética.
+
+Os filtros devem funcionar em conjunto e ser fáceis de utilizar no celular.
+
+### 3.5. Página individual do produto
+
+Ao clicar em um aparelho, o visitante deve acessar uma página com informações detalhadas.
+
+Inclua:
+
+- Galeria de fotografias.
+- Imagem principal em tamanho adequado.
+- Miniaturas das demais imagens.
+- Marca.
+- Modelo.
+- Armazenamento.
+- Cor, quando aplicável.
+- Condição do aparelho.
+- Preço atual.
+- Preço anterior, se houver promoção válida.
+- Descrição.
+- Especificações técnicas, quando cadastradas.
+- Disponibilidade.
+- Informações de garantia, somente se fornecidas pela loja.
+- Condições de pagamento, somente se confirmadas pelo proprietário.
+- Botão de contato pelo WhatsApp.
+- Sugestões de produtos relacionados, quando disponíveis.
+
+A galeria deve permitir ampliar e alternar as imagens facilmente.
+
+Produtos indisponíveis devem continuar identificáveis como esgotados, se o administrador optar por mantê-los visíveis.
+
+Não permita que um produto esgotado seja apresentado como disponível.
+
+---
+
+## 4. SISTEMA DE GERENCIAMENTO DE PRODUTOS
+
+Este é um dos requisitos mais importantes do projeto.
+
+O proprietário não sabe programar e precisa conseguir administrar o catálogo sozinho.
+
+Crie um sistema de gerenciamento simples, robusto e intuitivo.
+
+O administrador deve conseguir executar todas as operações abaixo sem modificar o código-fonte.
+
+### 4.1. Cadastrar um produto
+
+Crie um formulário com os seguintes campos:
+
+**Informações principais**
+- Nome do produto.
+- Marca.
+- Modelo.
+- Categoria.
+- Descrição.
+- Código interno opcional.
+
+**Características**
+- Capacidade de armazenamento.
+- Memória RAM, quando aplicável.
+- Cor.
+- Condição: novo, usado ou seminovo.
+- Acessórios incluídos, se aplicável.
+- Especificações técnicas adicionais.
+
+**Preço**
+- Preço de venda.
+- Preço anterior opcional.
+- Condições de pagamento.
+- Observações comerciais.
+
+O preço deve ser armazenado como um valor numérico apropriado, nunca como texto formatado. Formate-o em reais apenas na apresentação.
+
+O sistema deve validar os valores informados e impedir preços negativos ou inválidos.
+
+O preço anterior deve ser opcional e somente aparecer publicamente quando representar uma condição comercial verdadeira.
+
+**Imagens**
+- Upload da imagem principal.
+- Upload de várias imagens adicionais.
+- Visualização prévia antes de salvar.
+- Escolha da imagem principal.
+- Possibilidade de remover imagens.
+- Possibilidade de reorganizar a ordem das fotografias.
+
+**Disponibilidade**
+- Disponível.
+- Reservado, se a loja utilizar esse status.
+- Esgotado.
+
+**Exibição**
+- Publicado.
+- Rascunho.
+- Em destaque.
+
+O administrador deve poder salvar o produto sem publicá-lo imediatamente.
+
+### 4.2. Editar um produto
+
+O administrador deve conseguir abrir um produto existente e modificar qualquer informação.
+
+Exemplos:
+- Trocar o preço de R$ 2.000 para R$ 1.850.
+- Substituir uma fotografia antiga por uma fotografia real.
+- Adicionar novas imagens.
+- Corrigir o nome de um modelo.
+- Alterar a cor.
+- Modificar a descrição.
+- Atualizar o armazenamento.
+- Marcar um produto como esgotado.
+- Reativar um produto quando houver reposição.
+- Alterar a condição de disponibilidade.
+- Publicar ou retirar um produto do catálogo.
+
+Após salvar as alterações, o site público deve apresentar os dados atualizados.
+
+Não exija que o administrador reconstrua páginas para alterar informações de um aparelho.
+
+### 4.3. Excluir um produto
+
+Permita excluir produtos com uma etapa de confirmação.
+
+A confirmação deve identificar claramente qual produto será removido.
+
+Quando apropriado, ofereça a possibilidade de arquivar o produto em vez de excluí-lo definitivamente.
+
+Evite excluir automaticamente registros relacionados sem verificar as consequências.
+
+### 4.4. Duplicar um produto
+
+Implemente uma função para duplicar um produto existente.
+
+Isso será útil quando a loja tiver vários aparelhos semelhantes.
+
+Ao duplicar, permita modificar imediatamente:
+- Modelo.
+- Cor.
+- Armazenamento.
+- Preço.
+- Fotografias.
+- Disponibilidade.
+
+O novo produto deve receber um identificador próprio e não pode sobrescrever o produto original.
+
+### 4.5. Atualizar vários preços
+
+Se possível, implemente uma ferramenta de edição rápida ou em massa.
+
+O administrador deve conseguir visualizar uma tabela com:
+- Foto.
+- Nome.
+- Modelo.
+- Preço atual.
+- Disponibilidade.
+- Botão de edição.
+
+Permita alterar preços sem precisar abrir individualmente todos os produtos.
+
+Caso seja seguro e viável, ofereça atualização de vários produtos com confirmação antes de salvar.
+
+Não altere preços automaticamente sem autorização do administrador.
+
+### 4.6. Controle de estoque
+
+Crie um sistema simples de disponibilidade.
+
+Permita:
+- Marcar como disponível.
+- Marcar como reservado.
+- Marcar como esgotado.
+- Informar quantidade disponível, se a loja desejar controlar unidades.
+
+A quantidade deve ser opcional para produtos usados ou aparelhos vendidos individualmente.
+
+Quando a quantidade chegar a zero, o sistema deve impedir que o produto continue sendo exibido como disponível.
+
+Não implemente redução automática de estoque por cliques no WhatsApp, pois um contato não significa uma venda concluída.
+
+### 4.7. Facilidade de utilização
+
+O painel administrativo deve ser desenvolvido para alguém sem experiência técnica.
+
+Utilize:
+- Botões claros.
+- Formulários organizados.
+- Instruções curtas.
+- Mensagens de sucesso e erro compreensíveis.
+- Confirmações antes de ações importantes.
+- Salvamento confiável.
+- Indicadores de carregamento.
+- Prevenção contra envios duplicados.
+- Navegação simples.
+
+Priorize o uso pelo celular.
+
+O administrador deve conseguir cadastrar um novo aparelho e atualizar seu preço sem precisar utilizar um computador.
+
+---
+
+## 5. PAINEL ADMINISTRATIVO
+
+Crie uma área administrativa separada do site público.
+
+Exemplo de rota: /admin.
+
+A página administrativa não deve permitir que visitantes comuns alterem os produtos.
+
+### 5.1. Autenticação
+
+Implemente autenticação segura para o proprietário.
+
+Requisitos:
+- Login por e-mail e senha ou mecanismo seguro equivalente.
+- Recuperação de senha, se suportada.
+- Sessões protegidas.
+- Logout.
+- Controle de acesso às funções administrativas.
+- Proteção contra acesso não autorizado.
+
+Não coloque senhas, chaves privadas ou credenciais no código público do navegador.
+
+Não crie uma senha universal ou uma conta administrativa aberta a qualquer visitante.
+
+Se a plataforma tiver autenticação integrada, utilize-a corretamente.
+
+O proprietário deve receber instruções para acessar a conta administrativa.
+
+### 5.2. Página inicial do painel
+
+Ao entrar, o proprietário deve encontrar um resumo simples contendo:
+
+- Total de produtos cadastrados.
+- Quantidade de produtos disponíveis.
+- Quantidade de produtos esgotados.
+- Produtos em rascunho.
+- Atalho para adicionar produto.
+- Atalho para gerenciar o catálogo.
+- Atalho para editar informações da loja.
+
+Esses números devem ser calculados a partir dos dados reais.
+
+### 5.3. Gerenciamento do catálogo
+
+Crie uma tabela ou lista de produtos com:
+- Fotografia em miniatura.
+- Nome.
+- Modelo.
+- Preço.
+- Status.
+- Data da última alteração, se disponível.
+- Ações para editar, duplicar, visualizar e excluir.
+
+Inclua pesquisa e filtros administrativos.
+
+No celular, adapte a tabela para uma lista de cartões ou outro formato responsivo que não exija rolagem horizontal excessiva.
+
+### 5.4. Configurações da loja
+
+Crie uma área para o proprietário modificar:
+
+- Nome da loja.
+- Logotipo.
+- Descrição da empresa.
+- Número do WhatsApp.
+- Telefone.
+- Endereço.
+- Horários de funcionamento.
+- Instagram.
+- Outras redes sociais.
+- Cores principais da identidade visual.
+- Texto de apresentação.
+- Informações comerciais.
+
+Essas informações devem ser utilizadas automaticamente nas áreas correspondentes do site.
+
+O proprietário não deve precisar editar o código para trocar o número do WhatsApp ou o nome da loja.
+
+---
+
+## 6. FOTOGRAFIAS REAIS DOS PRODUTOS
+
+O sistema deve priorizar as fotografias reais fornecidas pela loja.
+
+Implemente upload de imagens com:
+- Pré-visualização.
+- Compressão adequada.
+- Redimensionamento otimizado.
+- Boa qualidade visual.
+- Limite de tamanho configurável.
+- Mensagens claras quando houver falha no envio.
+- Armazenamento persistente.
+- Carregamento rápido.
+
+Aceite formatos de imagem comuns, como JPEG, PNG e WebP.
+
+Valide os arquivos no servidor ou serviço de armazenamento, quando disponível.
+
+Não dependa exclusivamente de links temporários do dispositivo do administrador.
+
+As imagens devem continuar acessíveis após o fechamento do navegador e depois que o administrador sair da conta.
+
+Quando o proprietário substituir uma imagem, o site deve passar a utilizar a nova fotografia sem exigir alterações manuais no código.
+
+Evite que imagens antigas permaneçam visíveis por causa de cache. Utilize uma estratégia adequada de atualização de imagens.
+
+Se uma fotografia não carregar, apresente um espaço reservado visualmente consistente, sem quebrar o layout.
+
+Não utilize fotografias fictícias como se fossem imagens reais dos aparelhos vendidos.
+
+---
+
+## 7. INTEGRAÇÃO COM WHATSAPP
+
+Implemente botões de contato no site.
+
+O número da loja deve ser configurável pelo painel administrativo.
+
+Ao clicar em um botão relacionado a um produto, o visitante deve poder abrir uma conversa no WhatsApp com uma mensagem pré-preenchida.
+
+Exemplo de mensagem:
+
+"Olá! Tenho interesse no [nome do aparelho], modelo [modelo], anunciado por [preço]. Ele ainda está disponível?"
+
+A mensagem deve utilizar as informações atuais do produto.
+
+Se o produto estiver esgotado, não informe que ele está disponível.
+
+O botão geral de contato deve abrir uma conversa com uma mensagem apropriada para dúvidas gerais.
+
+Utilize o formato internacional correto do número, incluindo o código do Brasil quando aplicável.
+
+Não invente o telefone do proprietário.
+
+Se o número ainda não estiver configurado, mostre uma orientação para o administrador configurá-lo, em vez de exibir um botão quebrado.
+
+A integração deve funcionar no aplicativo do WhatsApp e no WhatsApp Web, conforme o dispositivo e o navegador.
+
+Não é necessário implementar uma API paga do WhatsApp para abrir conversas por links.
+
+---
+
+## 8. ARQUITETURA, BANCO DE DADOS E PERSISTÊNCIA
+
+O catálogo precisa ser dinâmico.
+
+Não armazene os produtos apenas em variáveis locais, arquivos estáticos ou dados temporários do navegador.
+
+Utilize um banco de dados persistente ou um serviço equivalente adequado à plataforma.
+
+Cada produto deve ter, no mínimo:
+- Identificador único.
+- Nome.
+- Marca.
+- Modelo.
+- Categoria.
+- Descrição.
+- Preço.
+- Preço anterior opcional.
+- Condição.
+- Cor opcional.
+- Armazenamento opcional.
+- Especificações adicionais.
+- Imagem principal.
+- Imagens adicionais.
+- Disponibilidade.
+- Quantidade opcional.
+- Status de publicação.
+- Indicador de destaque.
+- Data de criação.
+- Data da última atualização.
+
+Organize as configurações da loja separadamente dos dados dos produtos.
+
+A estrutura deve permitir que novos campos sejam adicionados futuramente sem exigir a reconstrução de todo o projeto.
+
+Implemente operações reais de criação, leitura, atualização e exclusão de produtos.
+
+Se utilizar uma solução como Supabase ou outro backend gerenciado, configure corretamente:
+- Banco de dados.
+- Armazenamento de imagens.
+- Autenticação.
+- Regras de acesso.
+- Permissões administrativas.
+- Proteção dos dados.
+
+Apenas usuários autorizados podem criar, editar ou excluir produtos.
+
+O público pode visualizar apenas os dados que devem ser públicos.
+
+Não exponha credenciais privadas no frontend.
+
+Não utilize dados fictícios como substitutos permanentes do banco de dados.
+
+Se a plataforma não oferecer backend ou armazenamento, informe claramente a limitação e proponha uma alternativa funcional antes de declarar o projeto concluído.
+
+---
+
+## 9. EXPERIÊNCIA MOBILE E RESPONSIVIDADE
+
+O site deve ser desenvolvido com prioridade para dispositivos móveis, sem prejudicar a experiência no computador.
+
+Teste pelo menos os seguintes cenários:
+- Celular Android.
+- Celular iPhone, quando possível.
+- Tablet.
+- Notebook.
+- Monitor de computador.
+
+Requisitos:
+- Layout adaptável.
+- Texto legível.
+- Botões fáceis de tocar.
+- Imagens proporcionais.
+- Menus funcionais.
+- Pesquisa utilizável em telas pequenas.
+- Filtros acessíveis.
+- Formulários administrativos responsivos.
+- Galeria de produtos funcional.
+- Ausência de rolagem horizontal indevida.
+- Carregamento rápido.
+
+O painel administrativo deve ser tão funcional no celular quanto no computador.
+
+O proprietário precisa conseguir adicionar um aparelho, selecionar fotografias da galeria do telefone e atualizar o preço sem depender de um PC.
+
+---
+
+## 10. DESEMPENHO E OTIMIZAÇÃO
+
+Otimize o site para carregar rapidamente, inclusive em conexões móveis mais lentas.
+
+Implemente:
+- Imagens responsivas.
+- Carregamento tardio de imagens quando apropriado.
+- Compressão de imagens.
+- Paginação ou carregamento progressivo quando o catálogo for grande.
+- Consultas eficientes ao banco de dados.
+- Prevenção contra solicitações desnecessárias.
+- Tratamento de erros.
+- Estados de carregamento.
+- Cache apropriado sem apresentar preços ou disponibilidade desatualizados.
+
+Não carregue todas as fotografias em resolução máxima quando isso prejudicar a velocidade.
+
+Não adicione bibliotecas desnecessárias.
+
+Priorize confiabilidade, simplicidade e facilidade de manutenção.
+
+---
+
+## 11. SEO E COMPARTILHAMENTO
+
+Configure o site para que possa ser encontrado em mecanismos de pesquisa.
+
+Implemente:
+- Títulos de páginas adequados.
+- Descrições para mecanismos de pesquisa.
+- URLs legíveis.
+- Metadados Open Graph para compartilhamento.
+- Sitemap, quando suportado.
+- Arquivo robots.txt, quando apropriado.
+- Estrutura semântica de títulos.
+- Texto alternativo para imagens.
+- URLs individuais para produtos, se suportadas pela arquitetura.
+- Dados estruturados de produtos somente quando corretos e compatíveis com o conteúdo real.
+
+O nome, a marca e o modelo do produto devem aparecer de forma adequada nos títulos das respectivas páginas.
+
+Não invente avaliações, preços, disponibilidade, dados comerciais ou informações estruturadas.
+
+Não prometa que o site aparecerá imediatamente nas primeiras posições do Google.
+
+---
+
+## 12. SEGURANÇA E CONFIABILIDADE
+
+Implemente medidas de segurança apropriadas.
+
+Requisitos:
+- Autenticação administrativa.
+- Autorização validada no backend.
+- Proteção das operações administrativas.
+- Validação dos dados de entrada.
+- Tratamento seguro de erros.
+- Proteção das credenciais.
+- Validação de arquivos enviados.
+- Limites razoáveis para upload.
+- Prevenção contra alteração de produtos por visitantes.
+- Confirmação para exclusões.
+- Tratamento de falhas de conexão.
+- Mensagens compreensíveis ao usuário.
+
+Não considere esconder o endereço da página administrativa uma medida suficiente de segurança.
+
+Não armazene senhas em texto puro.
+
+Não permita que o visitante altere preços por meio do navegador.
+
+Não exponha dados pessoais ou informações administrativas desnecessárias.
+
+---
+
+## 13. DOMÍNIO E PUBLICAÇÃO
+
+Prepare o projeto para publicação em um domínio próprio.
+
+O endereço deve ser configurável, por exemplo:
+
+www.nomedaloja.com.br
+
+O domínio acima é apenas ilustrativo.
+
+Se a plataforma oferecer um endereço temporário, utilize-o durante o desenvolvimento e os testes.
+
+Explique os requisitos necessários para conectar o domínio definitivo.
+
+O site deve funcionar por HTTPS quando publicado em uma plataforma compatível.
+
+As alterações feitas no painel devem ser refletidas no site publicado, não apenas no ambiente de desenvolvimento.
+
+Não declare o site publicado se ele ainda estiver funcionando somente em uma pré-visualização local.
+
+---
+
+## 14. REGRAS DE NEGÓCIO IMPORTANTES
+
+Respeite rigorosamente as seguintes regras:
+
+1. O proprietário é responsável pelos preços, pelas fotografias e pela disponibilidade dos aparelhos.
+2. Os preços apresentados no catálogo devem corresponder aos dados cadastrados.
+3. Não invente produtos, descontos ou condições de pagamento.
+4. Não exiba produtos em rascunho no catálogo público.
+5. Produtos esgotados devem ser identificados corretamente.
+6. Produtos excluídos não devem continuar aparecendo nas listagens públicas.
+7. Alterações devem persistir após atualizar a página ou entrar novamente no sistema.
+8. O administrador deve conseguir gerenciar tudo sem editar o código.
+9. A loja deve funcionar sem exigir que os visitantes criem contas.
+10. Não implemente pagamentos ou carrinho de compras sem necessidade.
+11. O WhatsApp é o principal canal de contato e negociação.
+12. O site deve funcionar independentemente de o administrador estar conectado.
+13. As imagens devem ser armazenadas em um serviço persistente.
+14. Os dados administrativos devem ser protegidos.
+15. O site deve continuar utilizável quando não houver produtos cadastrados.
+
+---
+
+## 15. CRITÉRIOS DE ACEITAÇÃO E TESTES OBRIGATÓRIOS
+
+Antes de considerar o projeto concluído, execute testes funcionais.
+
+### Teste 1 — Cadastro
+
+Entre no painel administrativo e cadastre um aparelho de teste com nome, marca, modelo, preço e fotografia.
+
+Verifique se o produto aparece corretamente no catálogo público após ser publicado.
+
+### Teste 2 — Alteração de preço
+
+Modifique o preço do aparelho.
+
+Verifique se o novo preço aparece no site e na mensagem pré-preenchida do WhatsApp.
+
+### Teste 3 — Substituição de imagem
+
+Troque a fotografia principal por outra imagem.
+
+Verifique se a nova imagem aparece no catálogo e na página individual.
+
+### Teste 4 — Novo produto
+
+Cadastre um segundo aparelho.
+
+Verifique se a pesquisa, os filtros e a ordenação continuam funcionando.
+
+### Teste 5 — Disponibilidade
+
+Marque um aparelho como esgotado.
+
+Verifique se o status aparece corretamente e se o site não o apresenta como disponível.
+
+### Teste 6 — Exclusão
+
+Exclua ou arquive um aparelho.
+
+Verifique se ele deixa de aparecer nas áreas públicas apropriadas.
+
+### Teste 7 — Persistência
+
+Atualize a página, feche o navegador e entre novamente no painel.
+
+Verifique se as alterações continuam salvas.
+
+### Teste 8 — Segurança
+
+Acesse a área administrativa sem autenticação.
+
+Verifique se as operações administrativas estão bloqueadas.
+
+Tente executar operações de alteração sem autorização e confirme que o backend as rejeita.
+
+### Teste 9 — Celular
+
+Realize o cadastro e a edição de um produto usando um celular.
+
+Verifique se é possível selecionar fotografias da galeria, modificar o preço e salvar as alterações.
+
+### Teste 10 — Computador
+
+Repita as operações essenciais em um computador.
+
+Confirme que o site e o painel administrativo funcionam corretamente.
+
+### Teste 11 — WhatsApp
+
+Clique nos botões de contato e verifique se as mensagens incluem o produto correto e o preço atualizado.
+
+### Teste 12 — Produtos vazios
+
+Remova os produtos de teste e verifique se o site continua apresentável, sem erros ou dados fictícios.
+
+Não declare um teste como aprovado sem ter verificado o comportamento correspondente.
+
+Se algum teste não puder ser executado, informe claramente essa limitação.
+
+---
+
+## 16. ORIENTAÇÕES DE IMPLEMENTAÇÃO
+
+Trabalhe de forma organizada.
+
+Primeiro, defina a arquitetura e a estrutura de dados.
+
+Depois, implemente o design e as páginas públicas.
+
+Em seguida, implemente o banco de dados, o armazenamento de imagens e a autenticação administrativa.
+
+Depois, conecte o painel administrativo ao catálogo público.
+
+Por fim, execute os testes e corrija os problemas encontrados.
+
+Se a ferramenta permitir executar o projeto, visualizar páginas e testar funcionalidades, utilize esses recursos.
+
+Não pare após gerar uma imagem de como o site deveria ser.
+
+Não entregue apenas um protótipo com botões que não funcionam.
+
+Não use armazenamento temporário como se fosse persistente.
+
+Não considere a autenticação concluída se qualquer visitante puder alterar os produtos.
+
+Não invente que o backend, o banco de dados ou o armazenamento estão configurados quando não estiverem.
+
+Caso falte alguma informação comercial, utilize um campo configurável ou um valor provisório claramente identificado.
+
+Não interrompa a implementação apenas porque o nome, o logotipo ou o telefone da loja ainda não foram fornecidos.
+
+Crie a estrutura completa e deixe essas informações editáveis.
+
+Se houver alguma limitação da plataforma, explique-a objetivamente e implemente a melhor alternativa realmente funcional.
+
+---
+
+## 17. RESULTADO FINAL ESPERADO
+
+Entregue um site comercial profissional, moderno, responsivo e funcional, com:
+
+- Página inicial.
+- Catálogo dinâmico de celulares.
+- Pesquisa e filtros.
+- Página individual de cada aparelho.
+- Galeria de imagens.
+- Preços editáveis.
+- Controle de disponibilidade.
+- Botões de WhatsApp.
+- Painel administrativo protegido.
+- Cadastro, edição, duplicação e exclusão de produtos.
+- Upload persistente de fotografias.
+- Configurações da loja.
+- Banco de dados persistente.
+- Layout otimizado para celular e computador.
+- Estrutura preparada para domínio próprio.
+- SEO básico.
+- Testes funcionais.
+
+O resultado deve ser simples o suficiente para que um comerciante sem conhecimentos técnicos consiga administrar seu próprio catálogo diariamente.
+
+**Prioridade máxima: facilidade de administração pelo celular, confiabilidade dos dados, fotografias reais, atualização de preços e funcionamento efetivo do sistema.**
+
+Antes de finalizar, apresente um resumo da arquitetura utilizada, dos recursos efetivamente implementados, dos serviços externos que precisam ser configurados e das etapas restantes para publicar o site definitivamente.

@@ -1,0 +1,145 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Smartphone, audio, or accessory product item in the store catalog.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "slug": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "brand": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "category": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "description": { "type": "string", "maxLength": 4000 },
+        "sku": { "type": "string", "maxLength": 40 },
+        "storage": { "type": "string", "maxLength": 40 },
+        "ram": { "type": "string", "maxLength": 40 },
+        "color": { "type": "string", "maxLength": 50 },
+        "condition": { "type": "string", "enum": ["novo", "seminovo", "usado"] },
+        "includedAccessories": { "type": "string", "maxLength": 500 },
+        "specs": { "type": "string", "maxLength": 2500 },
+        "price": { "type": "number" },
+        "previousPrice": { "type": "number" },
+        "paymentTerms": { "type": "string", "maxLength": 300 },
+        "commercialNotes": { "type": "string", "maxLength": 500 },
+        "warrantyInfo": { "type": "string", "maxLength": 300 },
+        "images": { "type": "array" },
+        "availability": { "type": "string", "enum": ["disponivel", "reservado", "esgotado"] },
+        "quantity": { "type": "number" },
+        "publishStatus": { "type": "string", "enum": ["publicado", "rascunho", "arquivado"] },
+        "featured": { "type": "boolean" },
+        "isOffer": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "slug",
+        "name",
+        "brand",
+        "model",
+        "category",
+        "description",
+        "condition",
+        "price",
+        "images",
+        "availability",
+        "publishStatus",
+        "featured",
+        "isOffer",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MediaAsset": {
+      "title": "MediaAsset",
+      "description": "Persistent compressed image uploaded by store administrator.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "mimeType": { "type": "string", "enum": ["image/jpeg", "image/png", "image/webp"] },
+        "dataBase64": { "type": "string", "minLength": 10, "maxLength": 900000 },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "sizeBytes": { "type": "number" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "mimeType", "dataBase64", "width", "height", "sizeBytes", "ownerId", "createdAt"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Configurable public store identity, contact channels, and policies.",
+      "type": "object",
+      "properties": {
+        "storeName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "tagline": { "type": "string", "maxLength": 180 },
+        "description": { "type": "string", "maxLength": 1500 },
+        "logoUrl": { "type": "string", "maxLength": 500 },
+        "accentColor": { "type": "string", "maxLength": 20 },
+        "whatsappNumber": { "type": "string", "maxLength": 25 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "address": { "type": "string", "maxLength": 300 },
+        "openingHours": { "type": "string", "maxLength": 200 },
+        "instagram": { "type": "string", "maxLength": 120 },
+        "otherSocials": { "type": "string", "maxLength": 300 },
+        "heroTitle": { "type": "string", "maxLength": 140 },
+        "heroSubtitle": { "type": "string", "maxLength": 320 },
+        "commercialHighlights": { "type": "array" },
+        "commercialPolicies": { "type": "string", "maxLength": 2000 },
+        "customDomain": { "type": "string", "maxLength": 120 },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "updatedBy": { "type": "string", "minLength": 1, "maxLength": 128 }
+      },
+      "required": ["storeName", "accentColor", "updatedAt", "updatedBy"]
+    },
+    "CatalogMeta": {
+      "title": "CatalogMeta",
+      "description": "Admin-managed brands and categories for filtering.",
+      "type": "object",
+      "properties": {
+        "brands": { "type": "array" },
+        "categories": { "type": "array" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "updatedBy": { "type": "string", "minLength": 1, "maxLength": 128 }
+      },
+      "required": ["brands", "categories", "updatedAt", "updatedBy"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized store administrator record.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "role": { "type": "string", "enum": ["admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Publicly readable when publishStatus == 'publicado'; full CRUD for verified admin."
+    },
+    "/media/{mediaId}": {
+      "schema": { "$ref": "#/entities/MediaAsset" },
+      "description": "Uploaded product and logo images; publicly readable by ID, write/delete by admin only."
+    },
+    "/storeSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/StoreSettings" },
+      "description": "Public storefront configuration ('main'); editable only by verified admin."
+    },
+    "/catalogMeta/{metaId}": {
+      "schema": { "$ref": "#/entities/CatalogMeta" },
+      "description": "Admin-managed brands and categories ('taxonomy'); publicly readable, admin writable."
+    },
+    "/admins/{uid}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Authorized administrator registry; accessible only to verified admins."
+    }
+  }
+}

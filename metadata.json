@@ -1,0 +1,6 @@
+{
+  "name": "Verri Imports — Catálogo de Celulares e Acessórios",
+  "description": "Catálogo digital de smartphones novos e seminovos, áudio e acessórios com atendimento direto pelo WhatsApp e painel administrativo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,246 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global safety net: deny everything by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Reusable Hardened Helpers ---
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isBootstrappedAdmin() {
+      return isVerified() && request.auth.token.email == 'pedronepo097@gmail.com';
+    }
+
+    function isAdmin() {
+      return isBootstrappedAdmin() || (isVerified() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    function isOptionalString(data, field, maxLen) {
+      return !(field in data) || data[field] == null || (data[field] is string && data[field].size() <= maxLen);
+    }
+
+    // --- Validation Blueprints ---
+    function isValidProduct(data) {
+      return data.keys().hasAll([
+        'id', 'slug', 'name', 'brand', 'model', 'category', 'description',
+        'condition', 'price', 'images', 'availability', 'publishStatus',
+        'featured', 'isOffer', 'ownerId', 'createdAt', 'updatedAt'
+      ])
+      && data.keys().hasOnly([
+        'id', 'slug', 'name', 'brand', 'model', 'category', 'description',
+        'sku', 'storage', 'ram', 'color', 'condition', 'includedAccessories',
+        'specs', 'price', 'previousPrice', 'paymentTerms', 'commercialNotes',
+        'warrantyInfo', 'images', 'availability', 'quantity', 'publishStatus',
+        'featured', 'isOffer', 'ownerId', 'createdAt', 'updatedAt'
+      ])
+      && isValidId(data.id)
+      && data.slug is string && data.slug.size() >= 1 && data.slug.size() <= 160
+      && data.name is string && data.name.size() >= 1 && data.name.size() <= 140
+      && data.brand is string && data.brand.size() >= 1 && data.brand.size() <= 60
+      && data.model is string && data.model.size() >= 1 && data.model.size() <= 100
+      && data.category is string && data.category.size() >= 1 && data.category.size() <= 60
+      && data.description is string && data.description.size() <= 4000
+      && isOptionalString(data, 'sku', 40)
+      && isOptionalString(data, 'storage', 40)
+      && isOptionalString(data, 'ram', 40)
+      && isOptionalString(data, 'color', 50)
+      && data.condition in ['novo', 'seminovo', 'usado']
+      && isOptionalString(data, 'includedAccessories', 500)
+      && isOptionalString(data, 'specs', 2500)
+      && data.price is number && data.price >= 0
+      && (!('previousPrice' in data) || data.previousPrice == null || (data.previousPrice is number && data.previousPrice > data.price))
+      && isOptionalString(data, 'paymentTerms', 300)
+      && isOptionalString(data, 'commercialNotes', 500)
+      && isOptionalString(data, 'warrantyInfo', 300)
+      && data.images is list && data.images.size() <= 12
+      && (data.images.size() == 0 || (data.images[0] is map && data.images[0].url is string && data.images[0].url.size() <= 500))
+      && data.availability in ['disponivel', 'reservado', 'esgotado']
+      && (!('quantity' in data) || data.quantity == null || (data.quantity is number && data.quantity >= 0))
+      && (!('quantity' in data) || data.quantity == null || data.quantity > 0 || data.availability != 'disponivel')
+      && data.publishStatus in ['publicado', 'rascunho', 'arquivado']
+      && data.featured is bool
+      && data.isOffer is bool
+      && data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128
+      && data.createdAt is timestamp
+      && data.updatedAt is timestamp;
+    }
+
+    function isValidMedia(data) {
+      return data.keys().hasAll(['id', 'mimeType', 'dataBase64', 'width', 'height', 'sizeBytes', 'ownerId', 'createdAt'])
+      && data.keys().hasOnly(['id', 'mimeType', 'dataBase64', 'width', 'height', 'sizeBytes', 'ownerId', 'createdAt'])
+      && isValidId(data.id)
+      && data.mimeType in ['image/jpeg', 'image/png', 'image/webp']
+      && data.dataBase64 is string && data.dataBase64.size() >= 10 && data.dataBase64.size() <= 900000
+      && data.width is number && data.width > 0 && data.width <= 4096
+      && data.height is number && data.height > 0 && data.height <= 4096
+      && data.sizeBytes is number && data.sizeBytes > 0 && data.sizeBytes <= 700000
+      && data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128
+      && data.createdAt is timestamp;
+    }
+
+    function isValidStoreSettings(data) {
+      return data.keys().hasAll(['storeName', 'accentColor', 'updatedAt', 'updatedBy'])
+      && data.keys().hasOnly([
+        'storeName', 'tagline', 'description', 'logoUrl', 'accentColor',
+        'whatsappNumber', 'phone', 'address', 'openingHours', 'instagram',
+        'otherSocials', 'heroTitle', 'heroSubtitle', 'commercialHighlights',
+        'commercialPolicies', 'customDomain', 'updatedAt', 'updatedBy'
+      ])
+      && data.storeName is string && data.storeName.size() >= 1 && data.storeName.size() <= 80
+      && isOptionalString(data, 'tagline', 180)
+      && isOptionalString(data, 'description', 1500)
+      && isOptionalString(data, 'logoUrl', 500)
+      && data.accentColor is string && data.accentColor.size() >= 4 && data.accentColor.size() <= 20
+      && isOptionalString(data, 'whatsappNumber', 25)
+      && isOptionalString(data, 'phone', 30)
+      && isOptionalString(data, 'address', 300)
+      && isOptionalString(data, 'openingHours', 200)
+      && isOptionalString(data, 'instagram', 120)
+      && isOptionalString(data, 'otherSocials', 300)
+      && isOptionalString(data, 'heroTitle', 140)
+      && isOptionalString(data, 'heroSubtitle', 320)
+      && (!('commercialHighlights' in data) || (data.commercialHighlights is list && data.commercialHighlights.size() <= 6 && (data.commercialHighlights.size() == 0 || (data.commercialHighlights[0] is string && data.commercialHighlights[0].size() <= 160))))
+      && isOptionalString(data, 'commercialPolicies', 2000)
+      && isOptionalString(data, 'customDomain', 120)
+      && data.updatedAt is timestamp
+      && data.updatedBy is string && data.updatedBy.size() >= 1 && data.updatedBy.size() <= 128;
+    }
+
+    function isValidCatalogMeta(data) {
+      return data.keys().hasAll(['brands', 'categories', 'updatedAt', 'updatedBy'])
+      && data.keys().hasOnly(['brands', 'categories', 'updatedAt', 'updatedBy'])
+      && data.brands is list && data.brands.size() <= 40
+      && (data.brands.size() == 0 || (data.brands[0] is string && data.brands[0].size() >= 1 && data.brands[0].size() <= 60))
+      && data.categories is list && data.categories.size() <= 40
+      && (data.categories.size() == 0 || (data.categories[0] is string && data.categories[0].size() >= 1 && data.categories[0].size() <= 60))
+      && data.updatedAt is timestamp
+      && data.updatedBy is string && data.updatedBy.size() >= 1 && data.updatedBy.size() <= 128;
+    }
+
+    function isValidAdminUser(data) {
+      return data.keys().hasAll(['email', 'role', 'createdAt'])
+      && data.keys().hasOnly(['email', 'role', 'createdAt'])
+      && data.email is string && data.email.size() >= 3 && data.email.size() <= 160
+      && data.role == 'admin'
+      && data.createdAt is timestamp;
+    }
+
+    // --- Collection Rules ---
+    match /products/{productId} {
+      allow get: if isValidId(productId) && (resource == null || existing().publishStatus == 'publicado' || isAdmin());
+      allow list: if resource.data.publishStatus == 'publicado' || isBootstrappedAdmin();
+      allow create: if isAdmin()
+        && isValidId(productId)
+        && isValidProduct(incoming())
+        && incoming().id == productId
+        && incoming().ownerId == request.auth.uid
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+      allow update: if isAdmin()
+        && isValidId(productId)
+        && isValidProduct(incoming())
+        && incoming().id == existing().id
+        && incoming().ownerId == existing().ownerId
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'slug', 'name', 'brand', 'model', 'category', 'description', 'sku',
+          'storage', 'ram', 'color', 'condition', 'includedAccessories', 'specs',
+          'price', 'previousPrice', 'paymentTerms', 'commercialNotes', 'warrantyInfo',
+          'images', 'availability', 'quantity', 'publishStatus', 'featured',
+          'isOffer', 'updatedAt'
+        ]);
+      allow delete: if isAdmin() && isValidId(productId);
+    }
+
+    match /media/{mediaId} {
+      allow get: if isValidId(mediaId);
+      allow list: if isBootstrappedAdmin();
+      allow create: if isAdmin()
+        && isValidId(mediaId)
+        && isValidMedia(incoming())
+        && incoming().id == mediaId
+        && incoming().ownerId == request.auth.uid
+        && incoming().createdAt == request.time;
+      allow update: if false;
+      allow delete: if isAdmin() && isValidId(mediaId);
+    }
+
+    match /storeSettings/{settingId} {
+      allow get: if isValidId(settingId) && settingId == 'main';
+      allow list: if false;
+      allow create: if isAdmin()
+        && isValidId(settingId)
+        && settingId == 'main'
+        && isValidStoreSettings(incoming())
+        && incoming().updatedBy == request.auth.uid
+        && incoming().updatedAt == request.time;
+      allow update: if isAdmin()
+        && isValidId(settingId)
+        && settingId == 'main'
+        && isValidStoreSettings(incoming())
+        && incoming().updatedBy == request.auth.uid
+        && incoming().updatedAt == request.time
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'storeName', 'tagline', 'description', 'logoUrl', 'accentColor',
+          'whatsappNumber', 'phone', 'address', 'openingHours', 'instagram',
+          'otherSocials', 'heroTitle', 'heroSubtitle', 'commercialHighlights',
+          'commercialPolicies', 'customDomain', 'updatedAt', 'updatedBy'
+        ]);
+      allow delete: if false;
+    }
+
+    match /catalogMeta/{metaId} {
+      allow get: if isValidId(metaId) && metaId == 'taxonomy';
+      allow list: if false;
+      allow create: if isAdmin()
+        && isValidId(metaId)
+        && metaId == 'taxonomy'
+        && isValidCatalogMeta(incoming())
+        && incoming().updatedBy == request.auth.uid
+        && incoming().updatedAt == request.time;
+      allow update: if isAdmin()
+        && isValidId(metaId)
+        && metaId == 'taxonomy'
+        && isValidCatalogMeta(incoming())
+        && incoming().updatedBy == request.auth.uid
+        && incoming().updatedAt == request.time
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'brands', 'categories', 'updatedAt', 'updatedBy'
+        ]);
+      allow delete: if false;
+    }
+
+    match /admins/{uid} {
+      allow get: if isAdmin() && isValidId(uid);
+      allow list: if isBootstrappedAdmin();
+      allow create: if isBootstrappedAdmin()
+        && isValidId(uid)
+        && isValidAdminUser(incoming())
+        && incoming().createdAt == request.time;
+      allow update: if false;
+      allow delete: if isBootstrappedAdmin() && isValidId(uid);
+    }
+  }
+}
